@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { use, useState } from 'react'
+import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const Edit = () => {
@@ -25,15 +25,20 @@ const Edit = () => {
 
     }
 
+    
+    
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
+        try{
 
-
-       let result = await axios.put(`http://localhost:3000/posts/${data.state.id}`,input);
-       console.log(result);
-       
-        console.log(result);
-        // nav('/')
+            let result = await axios.put(`http://localhost:3000/posts/${data.state.id}`,input);
+            nav('/')
+        }catch(e){
+            console.log(e);
+            
+        }
+      
 
 
     }
