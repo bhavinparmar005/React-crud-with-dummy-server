@@ -7,5 +7,45 @@
       "price": "2000000000",
       "descriptions": "super fmst"
     }
+  ],
+  "login": [
+    {
+      "id": "46eb",
+      "email": "bhavinparmar005@gmail.com",
+      "password": "1236"
+    },
+    {
+      "id": "0a74",
+      "email": "bhavinparmar005@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": "09e8",
+      "email": "bhavinparmar005@gmail.com",
+      "password": "123"
+    }
+  ],
+  "signup": [
+    {
+      "id": "a473",
+      "name": "Bhavin paramr",
+      "email": "bhavinparmar005@gmail.com",
+      "confirmPassword": "123",
+      "password": "123"
+    },
+    {
+      "id": "6aa1",
+      "name": "Bhavin paramr",
+      "email": "bhavinparmar005@gmail.com",
+      "confirmPassword": "123",
+      "password": "123"
+    },
+    {
+      "id": "cc1a",
+      "name": "Bhavin paramr",
+      "email": "bhavinparmar005@gmail.com",
+      "confirmPassword": "123",
+      "password": "123"
+    }
   ]
 }
