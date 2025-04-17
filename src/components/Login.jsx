@@ -1,60 +1,48 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-
 const Login = () => {
   const [input, setInput] = useState({
     email: "",
     password: ""
   })
-
   const [signData, setSignData] = useState("")
-
   const handleChange = (e) => {
     let name = e.target.name
     let value = e.target.value
-
     setInput({ ...input, [name]: value })
-
   }
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    // console.log(input);
+    e.preventDefault();
     try {
-
-      let filterData = signData.filter((val) => {
+      let filterData = signData.find((val) => {
         return (
           val.email === input.email && val.password === input.password
         )
-      })
+      });
+      // console.log(filterData);
       if (filterData) {
         let add = await axios.post("http://localhost:3000/login", input);
+        console.log("login data", input);
+      } else {
+        alert("maro aa")
       }
-
       setInput({
         email: "",
         password: ""
       })
-
     } catch (error) {
       console.log(error);
-
     }
-
-
   }
   const getsignData = async () => {
-
     let r = await axios.get("http://localhost:3000/signup")
-
     setSignData(r.data)
   }
   useEffect(() => {
     getsignData()
   }, [])
-
-  console.log(signData);
-
+  console.log("signdata", signData);
   return (
     <>
       <div className="container d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>

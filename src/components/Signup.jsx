@@ -1,38 +1,73 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
+
+
+    const [duplicat, setDuplicat] = useState("")
+    let nav=useNavigate()
+
     const [input, setInput] = useState({
         name: "",
         email: "",
         confirmPassword: "",
         password: ""
     })
+
     const handleChange = (e) => {
         let name = e.target.name
         let value = e.target.value
         setInput({ ...input, [name]: value })
     }
+
+    const exitingSignupData = async () => {
+        let dup = await axios.get("http://localhost:3000/signup")
+        setDuplicat(dup.data)
+    }
+
+    useEffect(() => {
+        exitingSignupData()
+    }, [])
+
+    console.log(duplicat);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(input);
+        // console.log(input);
         try {
-            let add = await axios.post("http://localhost:3000/signup", input);
-            // setInput({
-            //     name: "",
-            //     email: "",
-            //     confirmPassword: "",
-            //     password: ""
-            // })
-            console.log(add);
             
+            let dupData = duplicat.find((val) => {
+                return (
+                    val.email === input.email
+                )
+            })
 
+            console.log(dupData);
+            
+            if (!dupData) {
+                if (input.password === input.confirmPassword) {
+
+                    let add = await axios.post("http://localhost:3000/signup", input);
+                    alert("data added!");
+                    nav("/")
+                } else {
+                    alert("conform Password not match !!!")
+                }
+            } else {
+                alert("data che !!")
+            }
+            console.log(input);
+            setInput({
+                name: "",
+                email: "",
+                confirmPassword: "",
+                password: ""
+            })
         } catch (error) {
             console.log(error);
         }
     }
-
     return (
         <>
             <div className="container d-flex justify-content-center align-items-center " style={{ height: '100vh' }}>

@@ -19,6 +19,7 @@ const Home = () => {
         getData();
     }, []);
     
+    // getData();
     const deleteData = async (id) => { 
         try {
             let result =  await axios.delete(`http://localhost:3000/posts/${id}`); 
