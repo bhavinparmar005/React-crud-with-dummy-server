@@ -7,7 +7,7 @@ const Login = () => {
     email: "",
     password: ""
   })
-  const [signData, setSignData] = useState("")
+  const [signData, setSignData] = useState([])
   const handleChange = (e) => {
     let name = e.target.name
     let value = e.target.value

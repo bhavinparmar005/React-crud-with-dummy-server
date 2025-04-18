@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 const Signup = () => {
 
 
-    const [duplicat, setDuplicat] = useState("")
+    const [duplicat, setDuplicat] = useState([])
     let nav=useNavigate()
 
     const [input, setInput] = useState({
