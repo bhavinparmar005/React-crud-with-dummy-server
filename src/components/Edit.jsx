@@ -1,20 +1,28 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const Edit = () => {
 
-    let data = useLocation()
     let nav = useNavigate()
+    
+    let data = useLocation()
 
+
+
+useEffect(()=>{
+    if (data.state== null) {
+        nav("/")
+    }
+},[])
 
 
     const [input, setInput] = useState({
-        id: "" || data.state.id,
-        img: "" || data.state.img,
-        title: "" || data.state.title,
-        price: "" || data.state.price,
-        descriptions: "" || data.state.descriptions
+        id: data.state?.id,
+        img: data.state?.img,
+        title: data.state?.title,
+        price: data.state?.price,
+        descriptions: data.state?.descriptions
     })
 
 
@@ -24,21 +32,22 @@ const Edit = () => {
         setInput({ ...input, [name]: value })
 
     }
+ 
 
-    
-    
-    
+
+
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        try{
+        try {
 
-            let result = await axios.put(`http://localhost:3000/posts/${data.state.id}`,input);
+            let result = await axios.put(`http://localhost:3000/posts/${data.state.id}`, input);
             nav('/')
-        }catch(e){
+        } catch (e) {
             console.log(e);
-            
+
         }
-      
+
 
 
     }

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 const Login = () => {
+  let nav = useNavigate()
   const [input, setInput] = useState({
     email: "",
     password: ""
@@ -24,6 +25,8 @@ const Login = () => {
       if (filterData) {
         let add = await axios.post("http://localhost:3000/login", input);
         console.log("login data", input);
+
+        nav("/")
       } else {
         alert("maro aa")
       }

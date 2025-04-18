@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Add = () => {
@@ -10,8 +10,22 @@ const Add = () => {
         price: "",
         descriptions: ""
     })
-    let nav =useNavigate()
+    let nav = useNavigate()
 
+    const loginData = async () => {
+
+        let login = await axios.get("http://localhost:3000/login");
+
+        console.log(login.data);
+
+
+        if (login.data.length == 0) {
+            nav("/login")
+        }
+    }
+    useEffect(() => {
+        loginData()
+    }, [])
 
     const handleChange = (e) => {
         let name = e.target.name

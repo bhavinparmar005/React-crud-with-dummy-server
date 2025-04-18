@@ -6,6 +6,23 @@ const Home = () => {
     const [data, setData] = useState([]);
     const nav = useNavigate();
 
+
+
+    const loginData = async () => {
+
+        let login = await axios.get("http://localhost:3000/login");
+
+        console.log(login.data);
+        
+
+        if (login.data.length ==0) {
+            nav("/login")
+        }
+    }
+
+  
+    
+    
     const getData = async () => {
         try {
             const response = await axios.get("http://localhost:3000/posts");
@@ -14,15 +31,16 @@ const Home = () => {
             console.error("Error fetching data:", e);
         }
     };
-
+    
     useEffect(() => {
+        loginData()
         getData();
     }, []);
-    
+
     // getData();
-    const deleteData = async (id) => { 
+    const deleteData = async (id) => {
         try {
-            let result =  await axios.delete(`http://localhost:3000/posts/${id}`); 
+            let result = await axios.delete(`http://localhost:3000/posts/${id}`);
             console.log(result);
             getData();
 
